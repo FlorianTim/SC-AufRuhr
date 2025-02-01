@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teile dein Foto auf Instagram</title>
+    <title>Teile dein Bild auf Social Media</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
         #preview { width: 100%; max-width: 400px; margin-top: 20px; display: none; }
         button { padding: 10px; margin: 10px; font-size: 16px; }
+        #shareBtn, #postBtn, #fbBtn { display: none; }
     </style>
 </head>
 <body>
 
-    <h1>Foto aufnehmen & auf Instagram teilen</h1>
+    <h1>GGC 2025 - Social Media</h1>
+    <p>Folgen, Teilen und Liken ist erwünscht 🌈🏸</p>
 
+    <button id="captureBtn">📸 Foto aufnehmen</button>
     <input type="file" accept="image/*" id="fileInput">
+    
     <img id="preview" alt="Foto-Vorschau">
     
-    <button id="shareBtn" style="display:none;">Auf Instagram teilen</button>
+    <button id="shareBtn">📤 Auf Instagram teilen</button>
+    <button id="fbBtn">📘 Auf Facebook teilen</button>
+    <button id="postBtn">🚀 Jetzt auf Instagram posten</button>
 
     <script src="script.js"></script>
 
