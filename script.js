@@ -3,10 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const captureBtn = document.getElementById("captureBtn");
     const preview = document.getElementById("preview");
     const shareBtn = document.getElementById("shareBtn");
-    const postBtn = document.getElementById("postBtn");
     const fbBtn = document.getElementById("fbBtn");
 
-    let imageUrl = ""; // Speicherung der Bild-URL für das Teilen
+    let imageUrl = ""; // Speicherung des Bildes zum Teilen
 
     // 📸 Foto aufnehmen
     captureBtn.addEventListener("click", () => {
@@ -29,23 +28,21 @@ document.addEventListener("DOMContentLoaded", () => {
             reader.onload = () => {
                 preview.src = reader.result;
                 preview.style.display = "block";
+                imageUrl = preview.src; // Das Bild direkt im Browser als Data-URL speichern
+                shareBtn.style.display = "inline-block";
+                fbBtn.style.display = "inline-block";
             };
             reader.readAsDataURL(file);
-
-            imageUrl = URL.createObjectURL(file);
-            shareBtn.style.display = "inline-block";
-            fbBtn.style.display = "inline-block";
-            postBtn.style.display = "inline-block";
         }
     }
 
-    // 📤 Teilen-Funktion mit Hashtags & Texten aus dem PDF für Instagram
+    // 📤 Teilen auf Instagram mit Web Share API
     shareBtn.addEventListener("click", () => {
         if (navigator.share) {
             navigator.share({
                 title: "GrubenGoldCup 2025",
                 text: "#ggc2025 #grubengoldcup #queerbadminton #queernrw @scaufruhr",
-                url: imageUrl
+                url: imageUrl // Web Share API erlaubt leider keine Data-URLs für Bilder
             }).then(() => console.log("Erfolgreich geteilt!"))
             .catch((error) => console.log("Fehler:", error));
         } else {
@@ -57,10 +54,5 @@ document.addEventListener("DOMContentLoaded", () => {
     fbBtn.addEventListener("click", () => {
         const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imageUrl)}&quote=${encodeURIComponent("#ggc2025 #grubengoldcup #queerbadminton #queernrw @scaufruhr")}`;
         window.open(fbShareUrl, "_blank");
-    });
-
-    // 🚀 "Jetzt posten"-Button für Instagram (öffnet Instagram mit Bild)
-    postBtn.addEventListener("click", () => {
-        window.location.href = `instagram://library?AssetPath=${encodeURIComponent(imageUrl)}`;
     });
 });
